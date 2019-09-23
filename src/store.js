@@ -14,30 +14,29 @@ export default new Vuex.Store({
   mutations: {},
   actions: {
   	findRecipesFromIngredients({commit, state}) {
-    	const APIKEY = "f164427952ade2ca59a10717ddb7ecc2";
-    	const APPID =  "1a6c0d8f";
-    	const URL = "https://api.edamam.com/search";
+  		const APIKEY = "f164427952ade2ca59a10717ddb7ecc2";
+  		const APPID =  "1a6c0d8f";
+  		const URL = "https://api.edamam.com/search";
+
+  		let query = desiredIngredients.join(", ");
 
   		axios.get(URL, {
   			params: {
-  			app_id: APPID,
-            app_key: APIKEY,
-            from: 0,
-            to: 50,
-            q: query
+  				app_id: APPID,
+  				app_key: APIKEY,
+  				from: 0,
+  				to: 50,
+  				q: query
 
   			}
   		})
-  		.then(function (response) {
-  			console.log(response);
+  		.then(response => { 
+  			createRecipeObjects(response, state); 
   		})
   		.catch(function (error) {
   			console.log(error);
-  		})
-  		.finally(function () {
-  			// always executed
+  			//set application state to ¯\_(ツ)_/¯
   		});
-
   	}
   }
 });
