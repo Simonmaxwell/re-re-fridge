@@ -12,8 +12,11 @@ export default new Vuex.Store({
   	resultRecipes: []
   },
   mutations: { 
-  	setResultRecipes(state, newvalue) { 
-  		state.resultRecipes = newvalue;
+  	setResultRecipes(state, newValue) { 
+  		state.resultRecipes = newValue;
+  	},
+  	setRepulsiveIngredients(state, newValue) {
+  		state.repulsiveIngredients = newValue;
   	}
   },
   actions: {
@@ -34,8 +37,8 @@ export default new Vuex.Store({
   			}
   		})
   		.then(response => { 
-  			createRecipeObjects(response, state); 
-  		})
+              commit("setResultRecipes", createRecipeObjects(response, state));
+          })
   		.catch(function (error) {
   			console.log(error);
   			//set application state to ¯\_(ツ)_/¯
