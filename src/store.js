@@ -11,7 +11,11 @@ export default new Vuex.Store({
   	repulsiveIngredients: [], 
   	resultRecipes: []
   },
-  mutations: {},
+  mutations: { 
+  	setResultRecipes(state, newvalue) { 
+  		state.resultRecipes = newvalue;
+  	}
+  },
   actions: {
   	findRecipesFromIngredients({commit, state}) {
   		const APIKEY = "f164427952ade2ca59a10717ddb7ecc2";
@@ -27,7 +31,6 @@ export default new Vuex.Store({
   				from: 0,
   				to: 50,
   				q: query
-
   			}
   		})
   		.then(response => { 

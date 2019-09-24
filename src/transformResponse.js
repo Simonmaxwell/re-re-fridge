@@ -12,16 +12,16 @@ const createRecipeObjects = (response, state) => {
 			listOfIngredients: ingredientListItems
 		});
 	}
-	recipeFilter(recipes);
+	return recipeFilter(recipes);
 }
 
-const recipeFilter = (recipes) => {
+const recipeFilter = (recipes, state) => {
 	let goodRecipes = [];
 	let recipeValidity = true;
 	for (let i = 0; i < recipes.length; i++) {
 		for (let k = 0; k < recipes[i].listOfIngredients.length; k++) {
-			for ( let j = 0; j < nongredients.length; j++) {
-				if (recipes[i].listOfIngredients[k].indexOf(nongredients[j]) != -1) {
+			for ( let j = 0; j < state.repulsiveIngredients.length; j++) {
+				if (recipes[i].listOfIngredients[k].indexOf(state.repulsiveIngredients[j]) != -1) {
 					recipeValidity = false;
 				};
 			};
